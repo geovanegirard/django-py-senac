@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sobre o Nosso Site de Batalhas</h1>
+        <p>Bem-vindo ao nosso site de batalhas entre usuários! Oferecemos uma plataforma moderna e fácil de usar para que você possa competir contra outros jogadores cadastrados.</p>
+        <p>Nosso objetivo é proporcionar uma experiência emocionante e segura para todos os entusiastas de batalhas. Aqui, você pode desafiar outros usuários, acompanhar resultados em tempo real e aproveitar promoções exclusivas.</p>
+        <p>Com nossa interface intuitiva, você pode rapidamente se envolver em batalhas, ver quem está liderando e tornar suas competições ainda mais emocionantes.</p>
+        <p>Junte-se a nós e participe das melhores batalhas contra outros jogadores. Estamos comprometidos em fornecer um ambiente justo e transparente para todos os nossos usuários.</p>
+
+        {% if request.session.usuario_id %}
+            <form action="{% url 'logout' %}" method="post" style="margin-top: 20px;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+
+            <a href="{% url 'apostar' %}" class="btn btn-primary" style="margin-top: 20px;">Apostar</a>
+
+            <a href="{% url 'atualizar_usuario' request.session.usuario_id %}" class="btn btn-warning" style="margin-top: 20px;">Atualizar Perfil</a>
+
+            <form action="{% url 'deletar_usuario' request.session.usuario_id %}" method="post" style="margin-top: 20px;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Deletar Conta</button>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>

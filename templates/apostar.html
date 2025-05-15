@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostar</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Aposta</h1>
+        
+        {% if mensagem_erro %}
+            <p class="error-message">{{ mensagem_erro }}</p>
+        {% elif resultado %}
+            <p>O vencedor da aposta é: <strong>{{ resultado.vencedor.nome }}</strong> (ID: {{ resultado.vencedor.id }})</p>
+            <p>Contra: <strong>{{ resultado.perdedor.nome }}</strong> (ID: {{ resultado.perdedor.id }})</p>
+        {% endif %}
+   
+        <a href="{% url 'apostar' %}" class="btn btn-primary">Nova Aposta</a>
+        
+       
+        <a href="{% url 'sobre' %}" class="btn btn-secondary">Voltar</a>
+    </div>
+</body>
+</html>
